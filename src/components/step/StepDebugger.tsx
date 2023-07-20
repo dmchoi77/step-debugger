@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 import mermaid from 'mermaid';
 import { useRouter } from 'next/router';
 import { Step, StepType } from '~/types/step.types';
+import SvgDebug from '../svgs/Debug';
 
 const mermaidCode = `
   graph TD
@@ -33,6 +34,7 @@ const StepDebugger: React.FC<{ setStep: React.Dispatch<React.SetStateAction<Step
 
   useEffect(() => {
     window.debuggerCallback = (step: StepType) => {
+      console.log('🚀 ~ file: StepDebugger.tsx:37 ~ useEffect ~ step:', step);
       let url = '/';
       switch (step) {
         case Step.Home:
@@ -77,21 +79,19 @@ const StepDebugger: React.FC<{ setStep: React.Dispatch<React.SetStateAction<Step
   useEffect(() => {}, []);
   return (
     <>
-      <button
+      <SvgDebug
         style={{
           cursor: 'pointer',
           padding: '10px',
-          width: '80px',
-          height: '80px',
+          width: '70px',
+          height: '70px',
           position: 'fixed',
           bottom: 0,
           right: 0,
           zIndex: '1302',
         }}
         onClick={() => setIsOpen((prev) => !prev)}
-      >
-        Debugger
-      </button>
+      />
 
       {isOpen && (
         <div
