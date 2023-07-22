@@ -1,8 +1,12 @@
-import MasterLayout from '../layout/MasterLayout';
+import { StepEnum } from '~/types/step.types';
+import MasterLayout from '../../components/layout/MasterLayout';
 
-interface IProps {}
+interface IProps {
+  onNext: any;
+}
 
-const Join: React.FC = ({}) => {
+const Join: React.FC<IProps> = ({ onNext }) => {
+  console.log('🚀 ~ file: index.tsx:9 ~ onNext:', onNext);
   return (
     <MasterLayout>
       <div
@@ -15,7 +19,7 @@ const Join: React.FC = ({}) => {
         }}
       >
         <div>가입하러 가기</div>
-        <button onClick={() => console.log('click')}>GO GO GO GO</button>
+        <button onClick={() => onNext}>GO GO GO GO</button>
       </div>
     </MasterLayout>
   );
