@@ -1,47 +1,68 @@
-import Head from 'next/head';
+import { useEffect, useState } from 'react';
 
-import { useState } from 'react';
+import StepDebugger, { RoutePath } from '~/components/step/StepDebugger';
 
-import PageA from '../components/pageA/PageA';
-import PageB from '~/components/pageB/PageB';
-import PageC from '~/components/pageC/PageC';
-import PageD from '~/components/pageD/PageD';
+import { StepEnum, Register, registerDefaultState, StepType } from '~/types/step.types';
+import PageA from './pageA';
+import PageB from './pageB';
+import PageC from './pageC';
+import PageD from './pageD';
+import { useRouter } from 'next/router';
+import useFunnel from '~/hooks/useFunnel';
 
-import Show from '~/components/step/Show';
-
-import StepDebugger from '~/components/step/StepDebugger';
-
-import { Step, Register, registerDefaultState, StepType } from '~/types/step.types';
-import Join from '~/components/join/Join';
+const isDev = process.env.NODE_ENV === 'development';
 
 export default function Home() {
-  const [step, setStep] = useState<StepType>(Step.Home);
   const [register, setRegister] = useState<Register>(registerDefaultState);
+  const router = useRouter();
+
+  // const getGraph = (step: string, children: ReactElement[]) => {
+  //   const result: string[] | ['graph TD'];
+
+  //   children.map((stepElement) => {
+  //     const stepName = stepElement.props.name;
+  //     const children = stepElement.props.children;
+  //   });
+  // };
+
+  const [setCurrentStep, Funnel] = useFunnel(['pageA', 'pageB', 'pageC', 'pageD'] as const);
+
+  const onNext = (step: StepEnum) => {
+    let url = '/';
+    switch (step) {
+      case StepEnum.PageA:
+        url = RoutePath.PageA;
+        break;
+      case StepEnum.PageB:
+        url = RoutePath.PageB;
+        break;
+      case StepEnum.PageC:
+        url = RoutePath.PageC;
+        break;
+      case StepEnum.PageD:
+        url = RoutePath.PageD;
+    }
+    router.push('/', url, { shallow: true });
+    setCurrentStep(step);
+  };
 
   return (
     <>
-      <Head>
-        <title>Step Debugger</title>
-        <meta name='description' content='Step debugger using mermaid.js' />
-        <meta name='viewport' content='width=device-width, initial-scale=1' />
-        <link rel='icon' href='/favicon.ico' />
-      </Head>
-      <Show isShow={step === Step.Home}>
-        <Join />
-      </Show>
-      <Show isShow={step === Step.PageA}>
-        <PageA />
-      </Show>
-      <Show isShow={step === Step.PageB}>
-        <PageB />
-      </Show>
-      <Show isShow={step === Step.PageC}>
-        <PageC />
-      </Show>
-      <Show isShow={step === Step.PageD}>
-        <PageD />
-      </Show>
-      {process.env.NODE_ENV === 'development' && <StepDebugger setStep={setStep} />}
+      <Funnel>
+        <Funnel.step name={StepEnum.PageA}>
+          <PageA onNext={() => onNext(StepEnum.PageB)} />
+        </Funnel.step>
+        <Funnel.step name={StepEnum.PageB}>
+          <PageB onNext={() => onNext(StepEnum.PageC)} />
+        </Funnel.step>
+        <Funnel.step name={StepEnum.PageC}>
+          <PageC onNext={() => onNext(StepEnum.PageD)} />
+        </Funnel.step>
+        <Funnel.step name={StepEnum.PageD}>
+          <PageD />
+        </Funnel.step>
+      </Funnel>
+      {isDev && <StepDebugger setStep={setCurrentStep} />}
     </>
   );
 }
