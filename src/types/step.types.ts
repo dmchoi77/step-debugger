@@ -1,6 +1,8 @@
-export type StepType = (typeof Step)[keyof typeof Step];
+import { Dispatch, SetStateAction } from 'react';
 
-export enum Step {
+export type StepType = (typeof StepEnum)[keyof typeof StepEnum];
+
+export enum StepEnum {
   Home = '시작',
   PageA = 'pageA',
   PageB = 'pageB',
@@ -23,3 +25,7 @@ export type Register = {
   accountNo: string;
   autoNo: string;
 };
+
+export interface CommonPageProps {
+  onNext: Dispatch<SetStateAction<StepType>>;
+}
