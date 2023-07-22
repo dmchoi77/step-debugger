@@ -1,17 +1,31 @@
 import styled from '@emotion/styled';
+import { useEffect, useState } from 'react';
 import Footer from '../footer/Footer';
 import Header from '../header/Header';
-
+import StepDebugger from '../step/StepDebugger';
+import devtools, { DevToolsEvent } from 'devtools-detect';
 interface IProps {
   children: JSX.Element | JSX.Element[];
 }
 
 const MasterLayout: React.FC<IProps> = ({ children }) => {
+  const [isOpenDebugger, setIsOpenDebugger] = useState(false);
+
+  useEffect(() => {
+    if (devtools.isOpen) setIsOpenDebugger(true);
+
+    window.addEventListener('devtoolschange', (event: DevToolsEvent) => {
+      if (event.detail.isOpen) return setIsOpenDebugger(true);
+      setIsOpenDebugger(false);
+    });
+  }, []);
+
   return (
     <MasterLayoutContainer>
       <Header />
       <PageArea>{children}</PageArea>
       <Footer />
+      {isOpenDebugger && <StepDebugger />}
     </MasterLayoutContainer>
   );
 };

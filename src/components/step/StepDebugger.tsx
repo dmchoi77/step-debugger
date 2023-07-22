@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, ReactElement } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 import mermaid from 'mermaid';
 import { StepType } from '~/types/step.types';
@@ -75,7 +75,7 @@ const StepDebugger: React.FC = () => {
             display: 'flex',
             position: 'fixed',
             top: 0,
-            // width: '100%',
+            width: '100%',
             height: '100%',
             justifyContent: 'center',
             alignItems: 'center',

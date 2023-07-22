@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import { StepEnum, Register, registerDefaultState } from '~/types/step.types';
 import PageA from './pageA';
 import PageB from './pageB';
