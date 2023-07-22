@@ -1,9 +1,9 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, ReactElement } from 'react';
 
 import mermaid from 'mermaid';
-import { useRouter } from 'next/router';
-import { Step, StepType } from '~/types/step.types';
+import { StepType } from '~/types/step.types';
 import SvgDebug from '../svgs/Debug';
+import { useAppContext } from '~/store/AppContext';
 
 const mermaidCode = `
   graph TD
@@ -24,37 +24,14 @@ export enum RoutePath {
   PageD = '/pageD',
 }
 
-const StepDebugger: React.FC<{ setStep: React.Dispatch<React.SetStateAction<StepType>> }> = ({
-  setStep,
-}) => {
+const StepDebugger: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const router = useRouter();
+  const { handleNext } = useAppContext();
 
   const diagramRefs = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    window.debuggerCallback = (step: StepType) => {
-      console.log('🚀 ~ file: StepDebugger.tsx:37 ~ useEffect ~ step:', step);
-      let url = '/';
-      switch (step) {
-        case Step.Home:
-          url = RoutePath.Home;
-          break;
-        case Step.PageA:
-          url = RoutePath.PageA;
-          break;
-        case Step.PageB:
-          url = RoutePath.PageB;
-          break;
-        case Step.PageC:
-          url = RoutePath.PageC;
-          break;
-        case Step.PageD:
-          url = RoutePath.PageD;
-      }
-      setStep(step);
-      router.push('/', url, { shallow: true });
-    };
+    window.debuggerCallback = (step: StepType) => handleNext(step);
 
     const renderChart = async (diagramId: string, mermaidCode: string) => {
       mermaid.initialize({
@@ -76,7 +53,6 @@ const StepDebugger: React.FC<{ setStep: React.Dispatch<React.SetStateAction<Step
     renderChart('mermaid', mermaidCode);
   }, [isOpen]);
 
-  useEffect(() => {}, []);
   return (
     <>
       <SvgDebug
@@ -99,7 +75,7 @@ const StepDebugger: React.FC<{ setStep: React.Dispatch<React.SetStateAction<Step
             display: 'flex',
             position: 'fixed',
             top: 0,
-            width: '100%',
+            // width: '100%',
             height: '100%',
             justifyContent: 'center',
             alignItems: 'center',

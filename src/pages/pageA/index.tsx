@@ -1,11 +1,13 @@
-import { GetStaticProps } from 'next';
-import { CommonPageProps, StepEnum, StepType } from '~/types/step.types';
+import { useAppContext } from '~/store/AppContext';
+import { StepEnum } from '~/types/step.types';
 
-const PageA: React.FC<CommonPageProps> = ({ onNext }) => {
+const PageA: React.FC = () => {
+  const { handleNext } = useAppContext();
+
   return (
     <>
       <div>Page A</div>
-      <button onClick={() => onNext(StepEnum.PageB)}>버튼</button>
+      <button onClick={() => handleNext(StepEnum.PageB)}>버튼</button>
     </>
   );
 };

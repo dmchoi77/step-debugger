@@ -1,5 +1,4 @@
-import { Dispatch, SetStateAction } from 'react';
-
+// '시작' | 'pageA' | 'pageB' | 'pageC' | 'pageD'
 export type StepType = (typeof StepEnum)[keyof typeof StepEnum];
 
 export enum StepEnum {
@@ -25,7 +24,3 @@ export type Register = {
   accountNo: string;
   autoNo: string;
 };
-
-export interface CommonPageProps {
-  onNext: Dispatch<SetStateAction<StepType>>;
-}

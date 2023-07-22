@@ -1,10 +1,8 @@
 import React from 'react';
 
-import { useState } from 'react';
+import { useAppContext } from '~/store/AppContext';
 
 import { StepType } from '~/types/step.types';
-
-// type StepType = readonly StepEnum[];
 
 type FunnelProps = {
   children: React.ReactNode;
@@ -15,8 +13,8 @@ type FunnelStepProps = {
   name: StepType;
 };
 
-const useFunnel = (initialStep: any) => {
-  const [currentStep, setCurrentStep] = useState<StepType>(initialStep[0]);
+const useFunnel = () => {
+  const { currentStep, handleNext } = useAppContext();
 
   const Funnel: React.FC<FunnelProps> & {
     step: React.FC<FunnelStepProps>;
@@ -32,12 +30,12 @@ const useFunnel = (initialStep: any) => {
   };
 
   const FunnelStep: React.FC<FunnelStepProps> = ({ children, name }) => {
-    return <div name={name}>{children}</div>;
+    return <div data-name={name}>{children}</div>;
   };
 
   Funnel.step = FunnelStep;
 
-  return [setCurrentStep, Funnel] as const;
+  return [handleNext, Funnel] as const;
 };
 
 export default useFunnel;
