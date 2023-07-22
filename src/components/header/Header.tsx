@@ -13,7 +13,7 @@ const HeaderContainer = styled.header`
 const Header: React.FC = () => {
   return (
     <HeaderContainer>
-      <span>HEADER</span>
+      <span>F12 개발자 도구를 열어보세요</span>
     </HeaderContainer>
   );
 };
