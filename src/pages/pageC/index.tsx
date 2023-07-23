@@ -7,7 +7,7 @@ const PageC: React.FC = () => {
   return (
     <>
       <div>Page C</div>
-      <button onClick={() => handleNext(StepEnum.PageD)}>버튼</button>
+      <button onClick={() => handleNext('pageD')}>버튼</button>
     </>
   );
 };

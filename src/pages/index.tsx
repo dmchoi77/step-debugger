@@ -13,16 +13,16 @@ export default function Home() {
   return (
     <>
       <Funnel>
-        <Funnel.step name={StepEnum.PageA}>
+        <Funnel.step name={'pageA'}>
           <PageA />
         </Funnel.step>
-        <Funnel.step name={StepEnum.PageB}>
+        <Funnel.step name={'pageB'}>
           <PageB />
         </Funnel.step>
-        <Funnel.step name={StepEnum.PageC}>
+        <Funnel.step name={'pageC'}>
           <PageC />
         </Funnel.step>
-        <Funnel.step name={StepEnum.PageD}>
+        <Funnel.step name={'pageD'}>
           <PageD />
         </Funnel.step>
       </Funnel>

@@ -1,5 +1,4 @@
 import { useAppContext } from '~/store/AppContext';
-import { StepEnum } from '~/types/step.types';
 
 const PageA: React.FC = () => {
   const { handleNext } = useAppContext();
@@ -7,7 +6,7 @@ const PageA: React.FC = () => {
   return (
     <>
       <div>Page A</div>
-      <button onClick={() => handleNext(StepEnum.PageB)}>버튼</button>
+      <button onClick={() => handleNext('pageB')}>버튼</button>
     </>
   );
 };

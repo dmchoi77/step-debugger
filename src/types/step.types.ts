@@ -1,13 +1,11 @@
-// '시작' | 'pageA' | 'pageB' | 'pageC' | 'pageD'
-export type StepType = (typeof StepEnum)[keyof typeof StepEnum];
-
 export enum StepEnum {
-  Home = '시작',
-  PageA = 'pageA',
-  PageB = 'pageB',
-  PageC = 'pageC',
-  PageD = 'pageD',
+  'pageA',
+  'pageB',
+  'pageC',
+  'pageD',
 }
+
+export type StepType = keyof typeof StepEnum;
 
 export const registerDefaultState = {
   name: '',

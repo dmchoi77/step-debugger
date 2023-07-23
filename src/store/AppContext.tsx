@@ -4,7 +4,7 @@ import { StepEnum, StepType } from '~/types/step.types';
 
 type AppContextType = {
   currentStep: StepType;
-  handleNext: (step: StepEnum) => void;
+  handleNext: (step: StepType) => void;
 };
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -20,11 +20,11 @@ export const useAppContext = () => {
 export const AppProvider: React.FC<{ children: ReactElement | ReactElement[] }> = ({
   children,
 }) => {
-  const [currentStep, setCurrentStep] = useState<StepType>(StepEnum.PageA);
+  const [currentStep, setCurrentStep] = useState<StepType>('pageA');
 
   const router = useRouter();
 
-  const handleNext = (step: StepEnum) => {
+  const handleNext = (step: StepType) => {
     setCurrentStep(step);
     router.push(`/${step}`, undefined, { shallow: true });
   };
