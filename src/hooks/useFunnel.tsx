@@ -8,16 +8,16 @@ type FunnelProps = {
   children: React.ReactNode;
 };
 
-type FunnelStepProps = {
+type FunnelStepProps<T> = {
   children: React.ReactNode;
-  name: StepType;
+  name: T;
 };
 
-const useFunnel = () => {
+const useFunnel = <T,>() => {
   const { currentStep, handleNext } = useAppContext();
 
   const Funnel: React.FC<FunnelProps> & {
-    step: React.FC<FunnelStepProps>;
+    step: React.FC<FunnelStepProps<T>>;
   } = ({ children }) => {
     const currentStepIndex = React.Children.toArray(children).findIndex(
       (child) => (child as React.ReactElement).props.name === currentStep,
@@ -29,7 +29,7 @@ const useFunnel = () => {
     return <div>{currentPage}</div>;
   };
 
-  const FunnelStep: React.FC<FunnelStepProps> = ({ children, name }) => {
+  const FunnelStep: React.FC<FunnelStepProps<T>> = ({ children, name }) => {
     return <div data-name={name}>{children}</div>;
   };
 
