@@ -1,4 +1,3 @@
-import { StepEnum, Register, registerDefaultState } from '~/types/step.types';
 import PageA from './pageA';
 import PageB from './pageB';
 import PageC from './pageC';
@@ -8,21 +7,21 @@ import useFunnel from '~/hooks/useFunnel';
 export default function Home() {
   // const [register, setRegister] = useState<Register>(registerDefaultState);
 
-  const [_, Funnel] = useFunnel();
+  const { Funnel } = useFunnel();
 
   return (
     <>
       <Funnel>
-        <Funnel.step name={'pageA'}>
+        <Funnel.step name='pageA'>
           <PageA />
         </Funnel.step>
-        <Funnel.step name={'pageB'}>
+        <Funnel.step name='pageB'>
           <PageB />
         </Funnel.step>
-        <Funnel.step name={'pageC'}>
+        <Funnel.step name='pageC'>
           <PageC />
         </Funnel.step>
-        <Funnel.step name={'pageD'}>
+        <Funnel.step name='pageD'>
           <PageD />
         </Funnel.step>
       </Funnel>

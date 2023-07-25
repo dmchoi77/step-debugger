@@ -1,41 +1,43 @@
-import React from 'react';
+import React, { useCallback, useState, Children } from 'react';
 
 import { useAppContext } from '~/store/AppContext';
-
 import { StepType } from '~/types/step.types';
+
+type FunnelStepProps = {
+  children: React.ReactNode;
+  name: StepType;
+};
 
 type FunnelProps = {
   children: React.ReactNode;
 };
 
-type FunnelStepProps<T> = {
-  children: React.ReactNode;
-  name: T;
-};
+type Funnel = React.FC<FunnelProps> & { step?: any };
 
-const useFunnel = <T,>() => {
+const useFunnel = () => {
   const { currentStep, handleNext } = useAppContext();
 
-  const Funnel: React.FC<FunnelProps> & {
-    step: React.FC<FunnelStepProps<T>>;
-  } = ({ children }) => {
-    const currentStepIndex = React.Children.toArray(children).findIndex(
-      (child) => (child as React.ReactElement).props.name === currentStep,
-    );
+  const Funnel: Funnel = useCallback(
+    ({ children }) => {
+      const currentStepIndex = React.Children.toArray(children).findIndex((child) => {
+        return (child as React.ReactElement).props.name === currentStep;
+      });
 
-    const currentPage =
-      currentStepIndex !== -1 ? (children as React.ReactElement[])[currentStepIndex] : null;
+      const currentPage =
+        currentStepIndex !== -1 ? (children as React.ReactElement[])[currentStepIndex] : null;
 
-    return <div>{currentPage}</div>;
-  };
+      return <div>{currentPage}</div>;
+    },
+    [currentStep],
+  );
 
-  const FunnelStep: React.FC<FunnelStepProps<T>> = ({ children, name }) => {
+  const FunnelStep: React.FC<FunnelStepProps> = useCallback(({ children, name }) => {
     return <div data-name={name}>{children}</div>;
-  };
+  }, []);
 
   Funnel.step = FunnelStep;
 
-  return [handleNext, Funnel] as const;
+  return { handleNext, Funnel } as const;
 };
 
 export default useFunnel;
