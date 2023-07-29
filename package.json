@@ -26,5 +26,6 @@
   },
   "devDependencies": {
     "devtools-detect": "^4.0.1"
-  }
+  },
+  "packageManager": "yarn@3.6.1"
 }
