@@ -41,13 +41,13 @@ const MasterLayoutContainer = styled.div`
   align-items: center;
   flex-direction: column;
   margin: 0;
-  padding:0;
+  padding: 0;
 `;
 
 const PageArea = styled.main`
   display: flex;
   flex-direction: column;
-  padding: 10px 0;
+  /* padding: 10px 0; */
   /* border: 1px solid #dadada87; */
   width: 100%;
   height: calc(100% - 55px);
