@@ -10,7 +10,7 @@ interface IProps {
 const Page4: React.FC<IProps> = ({ onNext, setRegister }) => {
   useEffect(() => {
     setRegister(registerDefaultState);
-  }, [setRegister]);
+  }, []);
 
   return (
     <>
