@@ -1,12 +1,14 @@
 import { useAppContext } from '~/store/AppContext';
+import { StepType } from '~/types/step.types';
 
-const Page2: React.FC = () => {
-  const { handleNext } = useAppContext();
-
+interface IProps {
+  onNext: () => void;
+}
+const Page2: React.FC<IProps> = ({ onNext }) => {
   return (
     <>
       <div>Page B</div>
-      <button onClick={() => handleNext('C')}>버튼</button>
+      <button onClick={onNext}>버튼</button>
     </>
   );
 };
