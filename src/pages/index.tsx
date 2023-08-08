@@ -19,7 +19,7 @@ export default function Home() {
   useEffect(() => {
     if (pageQueryParams) return setCurrentStep(pageQueryParams as StepType);
     setCurrentStep('A');
-  }, [pageQueryParams]);
+  }, [pageQueryParams, setCurrentStep]);
 
   return (
     <>

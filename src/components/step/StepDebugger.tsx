@@ -44,7 +44,7 @@ const StepDebugger: React.FC = () => {
     };
 
     renderChart('mermaid', mermaidCode);
-  }, [isOpen]);
+  }, [handleNext, isOpen]);
 
   return (
     <>

@@ -1,5 +1,5 @@
 import Button from './button/Button';
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
+import { Dispatch, SetStateAction, useCallback, useEffect, useRef, useState } from 'react';
 import { Register } from '~/shared/register';
 import BaseInput from './input/BaseInput';
 import SelectBox from './selectBox/SelectBox';
@@ -47,12 +47,14 @@ const Page3: React.FC<IProps> = ({ onNext, register, setRegister }) => {
     }));
   };
 
-  const handleCloseDialog = (event: MouseEvent) => {
-    if (isOpenDialog && dialogRef.current === event.target) {
-      setIsOpenDialog(false);
-    }
-  };
-
+  const handleCloseDialog = useCallback(
+    (event: MouseEvent) => {
+      if (isOpenDialog && dialogRef.current === event.target) {
+        setIsOpenDialog(false);
+      }
+    },
+    [isOpenDialog],
+  );
   const handleSubmit = () => setIsOpenDialog(true);
 
   useEffect(() => {
@@ -61,7 +63,7 @@ const Page3: React.FC<IProps> = ({ onNext, register, setRegister }) => {
     return () => {
       window.removeEventListener('click', (e) => handleCloseDialog(e));
     };
-  }, [isOpenDialog]);
+  }, [isOpenDialog, handleCloseDialog]);
 
   return (
     <>

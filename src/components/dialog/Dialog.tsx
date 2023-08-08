@@ -80,4 +80,5 @@ const Dialog = forwardRef<HTMLDivElement, IProps>(
   },
 );
 
+Dialog.displayName = 'Dialog';
 export default Dialog;
