@@ -1,8 +1,8 @@
 export enum StepEnum {
-  'pageA',
-  'pageB',
-  'pageC',
-  'pageD',
+  'A',
+  'B',
+  'C',
+  'D',
 }
 
 export type StepType = keyof typeof StepEnum;

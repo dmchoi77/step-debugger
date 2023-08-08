@@ -10,19 +10,11 @@ const mermaidCode = `
     A((pageA)) --> B((pageB))
     B((pageB)) --> C((pageC))
     C((pageC)) --> D((pageD))
-    click A call debuggerCallback(pageA)
-    click B call debuggerCallback(pageB)
-    click C call debuggerCallback(pageC)
-    click D call debuggerCallback(pageD)
+    click A call debuggerCallback(A)
+    click B call debuggerCallback(B)
+    click C call debuggerCallback(C)
+    click D call debuggerCallback(D)
 `;
-
-export enum RoutePath {
-  Home = '/',
-  PageA = '/pageA',
-  PageB = '/pageB',
-  PageC = '/pageC',
-  PageD = '/pageD',
-}
 
 const StepDebugger: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
