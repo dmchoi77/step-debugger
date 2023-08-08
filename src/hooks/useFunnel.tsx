@@ -1,6 +1,6 @@
-import React, { useCallback, useState, Children } from 'react';
+import { useRouter } from 'next/router';
+import React, { useCallback, useState } from 'react';
 
-import { useAppContext } from '~/store/AppContext';
 import { StepType } from '~/types/step.types';
 
 type FunnelStepProps = {
@@ -14,8 +14,10 @@ type FunnelProps = {
 
 type Funnel = React.FC<FunnelProps> & { step?: any };
 
-const useFunnel = () => {
-  const { currentStep, handleNext } = useAppContext();
+const useFunnel = <T,>(steps: T[]) => {
+  const [currentStep, setCurrentStep] = useState<T>(steps[0]);
+
+  const router = useRouter();
 
   const Funnel: Funnel = useCallback(
     ({ children }) => {
@@ -35,9 +37,14 @@ const useFunnel = () => {
     return <div data-name={name}>{children}</div>;
   }, []);
 
+  const handleNext = (step: T) => {
+    router.push(`/?page=${step}`, undefined, { shallow: true });
+    setCurrentStep(step);
+  };
+
   Funnel.step = FunnelStep;
 
-  return { handleNext, Funnel } as const;
+  return { Funnel, handleNext, setCurrentStep } as const;
 };
 
 export default useFunnel;
