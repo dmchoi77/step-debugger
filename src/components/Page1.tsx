@@ -32,7 +32,6 @@ const Page1: React.FC<IProps> = ({ onNext, register, setRegister }) => {
           value={register.name}
           onChange={handleInput}
           placeholder='이름을 입력하세요.'
-          autoFocus={true}
         />
       </div>
       <div

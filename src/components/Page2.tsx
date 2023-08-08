@@ -38,7 +38,6 @@ const Page2: React.FC<IProps> = ({ onNext, register, setRegister }) => {
           value={birth}
           name='birth'
           onChange={handleInput}
-          autoFocus={true}
         />
         <BaseInput
           placeholder='연락처를 입력하세요.'

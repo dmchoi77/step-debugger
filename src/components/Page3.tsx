@@ -83,7 +83,6 @@ const Page3: React.FC<IProps> = ({ onNext, register, setRegister }) => {
           value={register.accountNo}
           name='accountNo'
           onChange={handleInput}
-          autoFocus={true}
         />
       </div>
       <div
@@ -97,12 +96,7 @@ const Page3: React.FC<IProps> = ({ onNext, register, setRegister }) => {
           bottom: 0,
         }}
       >
-        <Button
-          onClick={handleSubmit}
-          isDisabled={!accountNo || !bankName}
-          text='다음'
-          color='#810707'
-        />
+        <Button onClick={handleSubmit} isDisabled={!accountNo || !bankName} text='다음' />
       </div>
       {isOpenDialog && (
         <Dialog
