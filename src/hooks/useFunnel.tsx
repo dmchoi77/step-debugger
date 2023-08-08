@@ -39,7 +39,6 @@ const useFunnel = <T,>(steps: T[]) => {
 
   const handleNext = (step: T) => {
     router.push(`/?page=${step}`, undefined, { shallow: true });
-    setCurrentStep(step);
   };
 
   Funnel.step = FunnelStep;
