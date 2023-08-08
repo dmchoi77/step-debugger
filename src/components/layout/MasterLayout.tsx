@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { useEffect, useState } from 'react';
-import Footer from '../footer/Footer';
+// import Footer from '../footer/Footer';
 import Header from '../header/Header';
 import StepDebugger from '../step/StepDebugger';
 import devtools, { DevToolsEvent } from 'devtools-detect';
@@ -24,7 +24,7 @@ const MasterLayout: React.FC<IProps> = ({ children }) => {
     <MasterLayoutContainer>
       <Header />
       <PageArea>{children}</PageArea>
-      <Footer />
+      {/* <Footer /> */}
       {isOpenDebugger && <StepDebugger />}
     </MasterLayoutContainer>
   );
@@ -51,12 +51,9 @@ const PageArea = styled.main`
   /* border: 1px solid #dadada87; */
   width: 100%;
   height: calc(100% - 55px);
+  overflow: hidden;
 
   @media (max-width: 320px) {
     height: calc(100% - 40px);
-  }
-
-  @media (max-height: 685px) {
-    overflow-y: scroll;
   }
 `;

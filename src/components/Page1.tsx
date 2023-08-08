@@ -1,40 +1,53 @@
-import { useEffect, useRef, useState } from 'react';
-import Dialog from '~/components/dialog/Dialog';
+import { Dispatch, SetStateAction } from 'react';
+import { Register } from '~/shared/register';
+import Button from './button/Button';
+import BaseInput from './input/BaseInput';
 
 interface IProps {
   onNext: () => void;
+  register: Register;
+  setRegister: Dispatch<SetStateAction<Register>>;
 }
 
-const Page1: React.FC<IProps> = ({ onNext }) => {
-  const [isOpenDialog, setIsOpenDialog] = useState(false);
-
-  const dialogRef = useRef<HTMLDivElement>(null);
-
-  const handleCloseDialog = (event: MouseEvent) => {
-    if (isOpenDialog && dialogRef.current === event.target) {
-      setIsOpenDialog(false);
-    }
+const Page1: React.FC<IProps> = ({ onNext, register, setRegister }) => {
+  const handleInput = ({ target: { name, value } }: React.ChangeEvent<HTMLInputElement>) => {
+    return setRegister((prev) => ({
+      ...prev,
+      [name]: value.trim(),
+    }));
   };
-
-  useEffect(() => {
-    window.addEventListener('click', (e) => handleCloseDialog(e));
-
-    return () => {
-      window.removeEventListener('click', (e) => handleCloseDialog(e));
-    };
-  }, [isOpenDialog]);
 
   return (
     <>
-      <div>Page A</div>
-      <button onClick={onNext}>버튼</button>
-      <button
-        onClick={() => setIsOpenDialog((prev) => !prev)}
-        css={{ width: '100%', height: '50px' }}
+      <div
+        css={{
+          display: 'flex',
+          gap: '10px',
+          flexDirection: 'column',
+          padding: '20px',
+        }}
       >
-        모달
-      </button>
-      {isOpenDialog && <Dialog ref={dialogRef} />}
+        <BaseInput
+          name='name'
+          value={register.name}
+          onChange={handleInput}
+          placeholder='이름을 입력하세요.'
+          autoFocus={true}
+        />
+      </div>
+      <div
+        css={{
+          display: 'flex',
+          gap: '10px',
+          flexDirection: 'column',
+          padding: '10px',
+          position: 'fixed',
+          width: '100%',
+          bottom: 0,
+        }}
+      >
+        <Button isDisabled={!register.name} onClick={onNext} text='다음' />
+      </div>
     </>
   );
 };
