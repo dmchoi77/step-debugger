@@ -2,7 +2,7 @@ import { useAppContext } from '~/store/AppContext';
 import { useEffect, useRef, useState } from 'react';
 import Dialog from '~/components/dialog/Dialog';
 
-const PageA: React.FC = () => {
+const Page1: React.FC = () => {
   const [isOpenDialog, setIsOpenDialog] = useState(false);
 
   const dialogRef = useRef<HTMLDivElement>(null);
@@ -26,7 +26,7 @@ const PageA: React.FC = () => {
   return (
     <>
       <div>Page A</div>
-      <button onClick={() => handleNext('pageB')}>버튼</button>
+      <button onClick={() => handleNext('B')}>버튼</button>
       <button
         onClick={() => setIsOpenDialog((prev) => !prev)}
         css={{ width: '100%', height: '50px' }}
@@ -38,4 +38,4 @@ const PageA: React.FC = () => {
   );
 };
 
-export default PageA;
+export default Page1;
