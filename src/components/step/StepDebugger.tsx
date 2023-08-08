@@ -4,6 +4,7 @@ import mermaid from 'mermaid';
 import { StepType } from '~/types/step.types';
 import SvgDebug from '../svgs/Debug';
 import { useAppContext } from '~/store/AppContext';
+import useFunnel from '~/hooks/useFunnel';
 
 const mermaidCode = `
   graph TD
@@ -18,7 +19,7 @@ const mermaidCode = `
 
 const StepDebugger: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { handleNext } = useAppContext();
+  const { handleNext } = useFunnel<StepType>(['A', 'B', 'C', 'D']);
 
   const diagramRefs = useRef<HTMLDivElement>(null);
 
