@@ -34,7 +34,7 @@ const BankList = [
 const Page3: React.FC<IProps> = ({ onNext, register, setRegister }) => {
   const { accountNo, bankName } = register;
 
-  const { dialogRef, isOpenDialog, onClose, onOpen } = useDialog();
+  const { dialogRef, open, onClose, setDialog } = useDialog();
 
   const handleInput = ({ target: { name, value } }: React.ChangeEvent<HTMLInputElement>) => {
     const onlyNumberRegex = /[^0-9]/g;
@@ -43,6 +43,16 @@ const Page3: React.FC<IProps> = ({ onNext, register, setRegister }) => {
     return setRegister((prev) => ({
       ...prev,
       [name]: parsingNumber,
+    }));
+  };
+
+  const onClickDialog = () => {
+    setDialog((prev) => ({
+      ...prev,
+      open: true,
+      handleConfirm: onNext,
+      handleClose: onClose,
+      mainText: `${register.name ?? '사용자'}님 제출하시렵니까?`,
     }));
   };
 
@@ -79,18 +89,9 @@ const Page3: React.FC<IProps> = ({ onNext, register, setRegister }) => {
           bottom: 0,
         }}
       >
-        <Button onClick={onOpen} isDisabled={!accountNo || !bankName} text='다음' />
+        <Button onClick={onClickDialog} isDisabled={!accountNo || !bankName} text='다음' />
       </div>
-      {isOpenDialog && (
-        <Dialog
-          ref={dialogRef}
-          mainText='제출하시겠습니까????'
-          cancelText='취소'
-          onClose={onClose}
-          handleConfirm={onNext}
-          handleCancel={onClose}
-        />
-      )}
+      {open && <Dialog ref={dialogRef} />}
     </>
   );
 };

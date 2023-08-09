@@ -1,35 +1,43 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { dialogDefaultState } from './../store/dialog/dialog';
+import { dialogState } from '~/store/dialog/dialog';
+import { useCallback, useEffect, useRef } from 'react';
+import { useRecoilState } from 'recoil';
 
 const useDialog = () => {
-  const [isOpenDialog, setIsOpenDialog] = useState(false);
+  const [{ open }, setDialog] = useRecoilState(dialogState);
 
   const dialogRef = useRef<HTMLDivElement>(null);
 
-  const onOpen = () => setIsOpenDialog(true);
-  const onClose = () => setIsOpenDialog(false);
-
   const handleCloseDialog = useCallback(
     (event: MouseEvent) => {
-      if (isOpenDialog && dialogRef.current === event.target) {
-        setIsOpenDialog(false);
+      if (open && dialogRef.current === event.target) {
+        setDialog(dialogDefaultState);
       }
     },
-    [isOpenDialog],
+    [open],
   );
 
+  const onClose = () => setDialog(dialogDefaultState);
+
   useEffect(() => {
-    window.addEventListener('click', (e) => handleCloseDialog(e));
+    window.addEventListener('click', handleCloseDialog);
 
     return () => {
-      window.removeEventListener('click', (e) => handleCloseDialog(e));
+      window.removeEventListener('click', handleCloseDialog);
     };
-  }, [isOpenDialog, handleCloseDialog]);
+  }, [open, handleCloseDialog]);
+
+  useEffect(() => {
+    return () => {
+      setDialog(dialogDefaultState);
+    };
+  }, []);
 
   return {
-    isOpenDialog,
+    open,
     dialogRef,
-    onOpen,
     onClose,
+    setDialog,
   };
 };
 

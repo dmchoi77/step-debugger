@@ -73,6 +73,7 @@ const StepDebugger: React.FC = () => {
             height: '100%',
             justifyContent: 'center',
             alignItems: 'center',
+            zIndex: '1301',
             // margin: '0 auto',
           }}
         >
