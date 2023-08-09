@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 // import Footer from '../footer/Footer';
 import Header from '../header/Header';
 import StepDebugger from '../step/StepDebugger';
-import { addListener, launch } from 'devtools-detector';
+import { addListener, removeListener, launch } from 'devtools-detector';
 
 interface IProps {
   children: JSX.Element | JSX.Element[];
@@ -12,10 +12,17 @@ interface IProps {
 const MasterLayout: React.FC<IProps> = ({ children }) => {
   const [isOpenDebugger, setIsOpenDebugger] = useState(false);
 
+  const isDetected = (isOpen: boolean) =>
+    isOpen ? setIsOpenDebugger(true) : setIsOpenDebugger(false);
+
   useEffect(() => {
-    addListener((isOpen) => (isOpen ? setIsOpenDebugger(true) : setIsOpenDebugger(false)));
+    addListener(isDetected);
 
     launch();
+
+    return () => {
+      removeListener(isDetected);
+    };
   }, []);
 
   return (
