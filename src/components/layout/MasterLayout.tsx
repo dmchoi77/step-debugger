@@ -3,7 +3,8 @@ import { useEffect, useState } from 'react';
 // import Footer from '../footer/Footer';
 import Header from '../header/Header';
 import StepDebugger from '../step/StepDebugger';
-import devtools, { DevToolsEvent } from 'devtools-detect';
+import { addListener, launch } from 'devtools-detector';
+
 interface IProps {
   children: JSX.Element | JSX.Element[];
 }
@@ -12,12 +13,9 @@ const MasterLayout: React.FC<IProps> = ({ children }) => {
   const [isOpenDebugger, setIsOpenDebugger] = useState(false);
 
   useEffect(() => {
-    if (devtools.isOpen) setIsOpenDebugger(true);
+    addListener((isOpen) => (isOpen ? setIsOpenDebugger(true) : setIsOpenDebugger(false)));
 
-    window.addEventListener('devtoolschange', (event: DevToolsEvent) => {
-      if (event.detail.isOpen) return setIsOpenDebugger(true);
-      setIsOpenDebugger(false);
-    });
+    launch();
   }, []);
 
   return (

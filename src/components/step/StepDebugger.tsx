@@ -5,6 +5,7 @@ import { StepType } from '~/types/step.types';
 import SvgDebug from '../svgs/Debug';
 import { useAppContext } from '~/store/AppContext';
 import useFunnel from '~/hooks/useFunnel';
+import { GlobalPortal } from '~/GlobalPortal';
 
 const mermaidCode = `
   graph TD
@@ -47,7 +48,7 @@ const StepDebugger: React.FC = () => {
   }, [isOpen]);
 
   return (
-    <>
+    <GlobalPortal.Consumer>
       <SvgDebug
         style={{
           cursor: 'pointer',
@@ -72,18 +73,17 @@ const StepDebugger: React.FC = () => {
             height: '100%',
             justifyContent: 'center',
             alignItems: 'center',
-            margin: '0 auto',
-            zIndex: '1301',
+            // margin: '0 auto',
           }}
         >
           <div
             style={{
               top: 0,
-              margin: '0 auto',
+              // margin: '0 auto',
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
-              width: '600px',
+              width: '100%',
               height: '100%',
               backgroundColor: '#00000045',
             }}
@@ -92,7 +92,7 @@ const StepDebugger: React.FC = () => {
           </div>
         </div>
       )}
-    </>
+    </GlobalPortal.Consumer>
   );
 };
 export default StepDebugger;

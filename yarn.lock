@@ -940,6 +940,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"compare-versions@npm:^3.6.0":
+  version: 3.6.0
+  resolution: "compare-versions@npm:3.6.0"
+  checksum: 7492a50cdaa2c27f5254eee7c4b38856e1c164991bab3d98d7fd067fe4b570d47123ecb92523b78338be86aa221668fd3868bfe8caa5587dc3ebbe1a03d52b5d
+  languageName: node
+  linkType: hard
+
 "concat-map@npm:0.0.1":
   version: 0.0.1
   resolution: "concat-map@npm:0.0.1"
@@ -1469,10 +1476,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"devtools-detect@npm:^4.0.1":
-  version: 4.0.1
-  resolution: "devtools-detect@npm:4.0.1"
-  checksum: b5ade20264442481a18ace125dda7e049700a7eb8984e03bce6b25500f6f88c90f8e90f7fa339b7e1d0eeee4743c6258feda5e403ae0531d63bc5e6085eaee13
+"devtools-detector@npm:^2.0.14":
+  version: 2.0.14
+  resolution: "devtools-detector@npm:2.0.14"
+  dependencies:
+    compare-versions: ^3.6.0
+  checksum: cdb4cd71fd8512609f5b1f302823ccb1224670e51ac8dcab05bade1a30f89b47cb462df3fb54971fd4f87676363272357124f299c07c8063c23281606951b095
   languageName: node
   linkType: hard
 
@@ -3825,7 +3834,7 @@ __metadata:
     "@types/node": 20.4.2
     "@types/react": 18.2.15
     "@types/react-dom": 18.2.7
-    devtools-detect: ^4.0.1
+    devtools-detector: ^2.0.14
     eslint: 8.45.0
     eslint-config-next: 13.4.10
     mermaid: ^10.2.4

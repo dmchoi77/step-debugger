@@ -23,7 +23,6 @@ const Dialog = forwardRef<HTMLDivElement, IProps>(
             top: 0,
             backgroundColor: '#0000007a',
             display: 'flex',
-            margin: '0 auto',
             justifyContent: 'center',
             alignItems: 'center',
           }}

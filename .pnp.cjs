@@ -34,7 +34,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/node", "npm:20.4.2"],\
             ["@types/react", "npm:18.2.15"],\
             ["@types/react-dom", "npm:18.2.7"],\
-            ["devtools-detect", "npm:4.0.1"],\
+            ["devtools-detector", "npm:2.0.14"],\
             ["eslint", "npm:8.45.0"],\
             ["eslint-config-next", "virtual:d82d9e738458972826ba1e9c0194f9763e67759da7ebfaa15f86fc3906cdeaeeb0ba527f236ce43c81e4b4d2068df43fdd735249e878f6f5a818b6db6c4020b9#npm:13.4.10"],\
             ["mermaid", "npm:10.2.4"],\
@@ -1199,6 +1199,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["compare-versions", [\
+        ["npm:3.6.0", {\
+          "packageLocation": "./.yarn/cache/compare-versions-npm-3.6.0-0bb57ed638-7492a50cda.zip/node_modules/compare-versions/",\
+          "packageDependencies": [\
+            ["compare-versions", "npm:3.6.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["concat-map", [\
         ["npm:0.0.1", {\
           "packageLocation": "./.yarn/cache/concat-map-npm-0.0.1-85a921b7ee-902a9f5d89.zip/node_modules/concat-map/",\
@@ -1844,11 +1853,12 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
-      ["devtools-detect", [\
-        ["npm:4.0.1", {\
-          "packageLocation": "./.yarn/cache/devtools-detect-npm-4.0.1-dc4d4660c8-b5ade20264.zip/node_modules/devtools-detect/",\
+      ["devtools-detector", [\
+        ["npm:2.0.14", {\
+          "packageLocation": "./.yarn/cache/devtools-detector-npm-2.0.14-511d3363b8-cdb4cd71fd.zip/node_modules/devtools-detector/",\
           "packageDependencies": [\
-            ["devtools-detect", "npm:4.0.1"]\
+            ["devtools-detector", "npm:2.0.14"],\
+            ["compare-versions", "npm:3.6.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -4584,7 +4594,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/node", "npm:20.4.2"],\
             ["@types/react", "npm:18.2.15"],\
             ["@types/react-dom", "npm:18.2.7"],\
-            ["devtools-detect", "npm:4.0.1"],\
+            ["devtools-detector", "npm:2.0.14"],\
             ["eslint", "npm:8.45.0"],\
             ["eslint-config-next", "virtual:d82d9e738458972826ba1e9c0194f9763e67759da7ebfaa15f86fc3906cdeaeeb0ba527f236ce43c81e4b4d2068df43fdd735249e878f6f5a818b6db6c4020b9#npm:13.4.10"],\
             ["mermaid", "npm:10.2.4"],\

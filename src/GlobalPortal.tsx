@@ -8,7 +8,6 @@ interface PortalProviderProps {
 }
 
 const PortalProvider = ({ children }: PortalProviderProps) => {
-  console.log('🚀 ~ file: GlobalPortal.tsx:11 ~ PortalProvider ~ children:', children);
   const [portalContainerRef, setPortalContainerRef] = useState<HTMLDivElement | null>(null);
   return (
     <PortalContext.Provider value={portalContainerRef}>
