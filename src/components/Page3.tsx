@@ -4,6 +4,7 @@ import { Register } from '~/shared/register';
 import BaseInput from './input/BaseInput';
 import SelectBox from './selectBox/SelectBox';
 import Dialog from './dialog/Dialog';
+import useDialog from '~/hooks/useDialog';
 
 interface IProps {
   onNext: () => void;
@@ -31,11 +32,9 @@ const BankList = [
 ];
 
 const Page3: React.FC<IProps> = ({ onNext, register, setRegister }) => {
-  const [isOpenDialog, setIsOpenDialog] = useState(false);
-
-  const dialogRef = useRef<HTMLDivElement>(null);
-
   const { accountNo, bankName } = register;
+
+  const { dialogRef, isOpenDialog, onClose, onOpen } = useDialog();
 
   const handleInput = ({ target: { name, value } }: React.ChangeEvent<HTMLInputElement>) => {
     const onlyNumberRegex = /[^0-9]/g;
@@ -46,24 +45,6 @@ const Page3: React.FC<IProps> = ({ onNext, register, setRegister }) => {
       [name]: parsingNumber,
     }));
   };
-
-  const handleCloseDialog = useCallback(
-    (event: MouseEvent) => {
-      if (isOpenDialog && dialogRef.current === event.target) {
-        setIsOpenDialog(false);
-      }
-    },
-    [isOpenDialog],
-  );
-  const handleSubmit = () => setIsOpenDialog(true);
-
-  useEffect(() => {
-    window.addEventListener('click', (e) => handleCloseDialog(e));
-
-    return () => {
-      window.removeEventListener('click', (e) => handleCloseDialog(e));
-    };
-  }, [isOpenDialog, handleCloseDialog]);
 
   return (
     <>
@@ -98,16 +79,16 @@ const Page3: React.FC<IProps> = ({ onNext, register, setRegister }) => {
           bottom: 0,
         }}
       >
-        <Button onClick={handleSubmit} isDisabled={!accountNo || !bankName} text='다음' />
+        <Button onClick={onOpen} isDisabled={!accountNo || !bankName} text='다음' />
       </div>
       {isOpenDialog && (
         <Dialog
           ref={dialogRef}
           mainText='제출하시겠습니까????'
           cancelText='취소'
-          onClose={() => setIsOpenDialog(false)}
+          onClose={onClose}
           handleConfirm={onNext}
-          handleCancel={() => setIsOpenDialog(false)}
+          handleCancel={onClose}
         />
       )}
     </>
